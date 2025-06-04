@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FURNITURE & GARDENING</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <style>
+/* 귀환 버튼 */
+.fixed-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 9999;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 15px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+.fixed-button:hover {
+  background-color: #45a049;
+}
+/* 중앙 귀환버튼 */
+.link-button {
+  position: fixed;
+  top: 110px;
+  left: 30px;
+  z-index: 9999;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+.link-button:hover {
+  background-color: #45a049;
+}
+
+/* 소리 버튼 */
+#play-youtube {
+  position: fixed;
+  top: 192px;
+  left: 30px;
+  z-index: 9999;
+  background-color: #0055FF;
+  color: white;
+  padding: 20px 11px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+#play-youtube:hover {
+  background-color: #45a049;
+}
+
+/* 바디&컨테이너 유지 */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "colors banner"
+    "text right1"
+    "left right2"
+    "link right2"
+    ". main";
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+header {
+  grid-area: header;
+  text-align: center;
+  transform: translate(23%, 30%);
+}
+header h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 40px;
+  margin: 0;
+}
+header h2 {
+  margin-top: 5px;
+  font-weight: normal;
+  transform: translate(10%, -10%);
+}
+.colors {
+  grid-area: colors;
+  height: 300px;
+}
+.banner {
+  grid-area: banner;
+  height: 300px;
+}
+.colors h2 {
+  margin-bottom: 10px;
+  transform: translate(36.5%, -52px);
+  z-index: 15;
+}
+.colors img {
+  width: 50%;
+  height: 130%;
+  object-fit: cover;
+  display: block;
+  vertical-align: top;
+  transform: translate(70%, -15%);
+}
+.banner img {
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  display: block;
+  vertical-align: top;
+}
+.text, .right1 {
+  margin-top: 18%;
+}
+.text {
+  grid-area: text;
+  font-size: 18px;
+  line-height: 1.6;
+  transform: translateX(36%);
+}
+.right1 {
+  grid-area: right1;
+  width: 60%;
+  transform: translateX(67%);
+}
+.right1 img {
+  width: 100%;
+  height: 101%;
+  display: block;
+  margin-left: auto;
+}
+.right2, .left {
+  margin-top: 2%;
+}
+.right2 {
+  grid-area: right2;
+  width: 45%;
+  transform: translateX(89%);
+}
+.right2 img {
+  width: 140%;
+  height: auto;
+  display: block;
+}
+.left {
+  grid-area: left;
+  grid-row: 4 / 6;
+  transform: translateX(36%);
+}
+.left img {
+  width: 102%;
+  height: 59.5%;
+  display: block;
+}
+#left1:hover, #right1:hover, #right2:hover {
+  filter: hue-rotate(60deg) saturate(110%);
+  transform: scale(1.05);
+}
+.link {
+  grid-area: link;
+  font-size: 14px;
+  text-align: right;
+  margin-top: -43px;
+  line-height: 1.8;
+  transform: translate(38%, -80px);
+}
+.link a {
+  color: FFBDD1;
+  text-decoration: none;
+  line-height: 1.5;
+}
+.link a:hover {
+  color: green;
+}
+.main {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.main img {
+  max-width: 45%;
+  height: auto;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+.main img:hover {
+  filter: hue-rotate(80deg) saturate(120%);
+  transform: scale(1.05);
+}
+.main img:first-child {
+  transform: scaleX(-1);
+}
+.main img:first-child:hover {
+  transform: scaleX(-1) scale(1.05);
+}
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header"
+      "colors"
+      "banner"
+      "text"
+      "main"
+      "left"
+      "right1"
+      "right2"
+      "link";
+    grid-template-columns: 1fr;
+  }
+  .main img {
+    max-width: 80%;
+  }
+  .colors, .banner {
+    height: auto;
+  }
+  .colors img, .banner img {
+    height: auto;
+  }
+}
+  </style>
+</head>
+
+
+
+
+<body>
+
+  <!-- 고정 버튼 -->
+  <a href="#top" class="fixed-button">HOOM</a>
+  <button id="play-youtube">SOUND</button>
+
+  <!-- 숨겨진 유튜브 플레이어 -->
+  <div id="ytplayer" style="display: none;"></div>
+
+  <div class="container">
+    <header>
+      <h1>Funiture & Gardening</h1>
+      <h2>More information about furniture</h2>
+    </header>
+
+    <div class="colors">
+      <h2>color of furnitures</h2>
+      <img src="left-colors.jpg" alt="좌측 색상표" />
+    </div>
+
+    <div class="banner">
+      <img src="background.jpeg" alt="배경" />
+    </div>
+
+    <div class="text">
+     <b>1. 자연을 담은 거실, 플랜트 스탠드</b><br>
+      거실이나 복도, 소파 옆처럼 비어 있는 코너에 플랜트 스탠드를 두면 훨씬 공간이 정돈된 느낌을 줍니다.
+      철제나 우드 소재의 스탠드는 식물과 잘 어울리며, 높낮이가 다른 화분을 조합하면 시각적인 재미도 생깁니다.
+      몬스테라, 고무나무, 알로카시아 같은 중형 식물이 잘 어울리며, 햇볕이 드는 자리면 더욱 생동감이 살아납니다.<br><br>
+
+      <b>2. 벽을 살리는 행잉 플랜트</b><br>
+      허전한 벽에는 식물을 매달아 보는 것도 좋은 아이디어입니다. 행잉 플랜트는 공간을 차지하지 않으면서도 인테리어 효과가 크고,
+      벽이나 천장 근처의 애매한 공간을 멋지게 채워줍니다. 스킨답서스, 아이비, 틸란드시아 등 가볍고 잘 늘어지는 식물이 적합하며,
+      간단한 선반 위에 배치해도 훌륭한 연출이 가능합니다.<br><br>
+
+      <b>3. 가구 위에 자연을 더하는 초록 포인트</b><br>
+      책장, 수납장, 식탁, 사이드 테이블 위에 작은 화분 하나만 올려도 분위기가 달라집니다. 다육식물이나 선인장, 유리병에 담긴 수경식물은 부담 없이 배치할 수 있어 인기 있는 선택입니다.
+      가구의 색감과 식물의 녹색이 어우러지면 공간이 더 아늑하고 생기 있어 보입니다. 특히 단조로운 공간일수록, 작은 초록 포인트가 주는 효과는 큽니다.
+      이런 인테리어를 통해 삶의 질을 되찾아보세요!
+    </div>
+
+    <div class="main"></div>
+
+    <div class="left">
+      <a href="https://chatgpt.com/g/g-FvT4UOsoA-caes" target="_blank">
+        <img src="top-left-room.jpeg" alt="좌측 상단" id="left1" />
+      </a>
+    </div>
+
+    <div class="right1">
+      <img src="top-right-room.jpeg" alt="우측 상단방" id="right1" />
+    </div>
+
+    <div class="right2">
+      <img src="bottom-right-room.jpeg" alt="우측 하단방" id="right2" />
+    </div>
+
+    <div class="link">
+      <a href="https://7gardeners.com/">
+        FURNITURE,GARDENING FURNITURE,GARDENING FURNITURE,GARDENING
+        FURNITURE,GARDENING FURNITURE,GARDENING FURNITURE,GARDENING
+        FURNITURE,GARDENING FURNITURE,GARDENING
+      </a>
+    </div>
+  </div>
+  <!--중앙화면 돌아가기 버튼-->
+<a href="https://example.com" target="_blank" class="link-button">MAIN</a>
+
+
+  <!--사운드-->
+  <script>
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    let player;
+    let isPlaying = false;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('ytplayer', {
+        height: '0',
+        width: '0',
+        videoId: 'lYJ17n_oUkA',
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          loop: 1,
+          playlist: 'lYJ17n_oUkA'
+        }
+      });
+    }
+
+    document.getElementById('play-youtube').addEventListener('click', () => {
+      if (!player) return;
+
+      if (!isPlaying) {
+        player.playVideo();
+        isPlaying = true;
+      } else {
+        player.pauseVideo();
+        isPlaying = false;
+      }
+    });
+  </script>
+</body>
+</html>

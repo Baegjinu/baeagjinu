@@ -9,12 +9,12 @@
 /* 홈 버튼 */
 .fixed-button {
   position: fixed;
-  top: 30px;
-  left: 30px;
+  top: 73px;
+  left: 20px;
   z-index: 9999;
   background-color: #4CAF50;
   color: white;
-  padding: 20px 15px;
+  padding: 11px 42px;
   border: none;
   border-radius: 8px;
   text-decoration: none;
@@ -27,37 +27,33 @@
   background-color: #45a049;
 }
 /* 중앙 귀환버튼 */
-.link-button {
+.main-button {
   position: fixed;
-  top: 110px;
-  left: 30px;
-  z-index: 9999;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
   background-color: #4CAF50;
   color: white;
-  padding: 20px 19px;
-  border: none;
-  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  display: inline-block;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   transition: background-color 0.3s ease;
 }
-.link-button:hover {
+.main-button:hover {
   background-color: #45a049;
 }
 
 /* 소리 버튼 */
 #play-youtube {
   position: fixed;
-  top: 192px;
-  left: 30px;
+  top: 128px;
+  left: 20px;
   z-index: 9999;
   background-color: #0055FF;
   color: white;
-  padding: 20px 15px;
+  padding: 11px 37px;
   border: none;
   border-radius: 8px;
   text-decoration: none;
@@ -69,6 +65,32 @@
 }
 #play-youtube:hover {
   background-color: #45a049;
+}
+
+/* 🔊 SOUND 버튼 애니메이션 */
+#play-youtube.playing {
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* 🍃 잎사귀 효과 */
+.leaf {
+  position: fixed;
+  font-size: 16px;
+  pointer-events: none;
+  opacity: 0.5;
+  animation: fadeOut 1s ease-out forwards;
+  z-index: 9999;
+}
+@keyframes fadeOut {
+  to {
+    transform: translateY(-20px) scale(0.8);
+    opacity: 0;
+  }
 }
 
 /* 바디&컨테이너 유지 */
@@ -249,9 +271,6 @@ header h2 {
   </style>
 </head>
 
-
-
-
 <body>
 
   <!-- 고정 버튼 -->
@@ -277,7 +296,7 @@ header h2 {
     </div>
 
     <div class="text">
-     <b>1. 자연을 담은 거실, 플랜트 스탠드</b><br>
+      <b>1. 자연을 담은 거실, 플랜트 스탠드</b><br>
       거실이나 복도, 소파 옆처럼 비어 있는 코너에 플랜트 스탠드를 두면 훨씬 공간이 정돈된 느낌을 줍니다.
       철제나 우드 소재의 스탠드는 식물과 잘 어울리며, 높낮이가 다른 화분을 조합하면 시각적인 재미도 생깁니다.
       몬스테라, 고무나무, 알로카시아 같은 중형 식물이 잘 어울리며, 햇볕이 드는 자리면 더욱 생동감이 살아납니다.<br><br>
@@ -318,8 +337,7 @@ header h2 {
     </div>
   </div>
   <!--중앙화면 돌아가기 버튼-->
-<a href="https://inugim58.github.io/gamja/" target="_blank" class="link-button">MAIN</a>
-
+  <a href="https://inugim58.github.io/gamja/" class="main-button">🏠MAIN PAGE</a>
 
   <!--사운드-->
   <script>
@@ -344,16 +362,34 @@ header h2 {
       });
     }
 
-    document.getElementById('play-youtube').addEventListener('click', () => {
+    const soundBtn = document.getElementById('play-youtube');
+    soundBtn.addEventListener('click', () => {
       if (!player) return;
 
       if (!isPlaying) {
         player.playVideo();
+        soundBtn.classList.add('playing'); // 애니메이션 ON
         isPlaying = true;
       } else {
         player.pauseVideo();
+        soundBtn.classList.remove('playing'); // 애니메이션 OFF
         isPlaying = false;
       }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      const leaf = document.createElement("div");
+      leaf.className = "leaf";
+      leaf.textContent = "🍃";
+      leaf.style.left = `${e.clientX}px`;
+      leaf.style.top = `${e.clientY}px`;
+      document.body.appendChild(leaf);
+
+      setTimeout(() => {
+        leaf.remove();
+      }, 1000);
     });
   </script>
 </body>
